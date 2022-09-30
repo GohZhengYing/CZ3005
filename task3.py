@@ -60,7 +60,7 @@ def run(c):
 
     return path
 
-#This was run to find out the best c in the evaluation function(h * c + total_cost + total_dist)
+#This was ran to find out the best c in the evaluation function(h * c + total_cost + total_dist)
 #It is commented out as it takes very long (~2mins) to compute
 # best_c = 0
 # lowest = 1000000000
