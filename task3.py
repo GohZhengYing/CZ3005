@@ -1,10 +1,10 @@
 import json
 import math
 
-G_file = open('../G.json','r')
-Coord_file = open('../Coord.json','r')
-Cost_file = open('../Cost.json','r')
-Dist_file = open('../Dist.json','r')
+G_file = open('./G.json','r')
+Coord_file = open('./Coord.json','r')
+Cost_file = open('./Cost.json','r')
+Dist_file = open('./Dist.json','r')
 
 G = json.load(G_file)
 Coord = json.load(Coord_file)
@@ -54,9 +54,15 @@ def run(c):
                         elif i == len(priority_queue)-1:
                             priority_queue.append(new_path)
 
-
-
-    return path
+    spath = 'Shortest path: '
+    for node in path[0]:
+        if path[0].index(node) != len(path[0]) - 1:
+            spath += (node + '->')
+        else:
+            spath += (node)
+    print(spath)
+    print('Shortest distance: ' + str(path[2]))
+    print('Total energy cost: ' + str(path[1]))
 
 #This was ran to find out the best c in the function(h * c + total_cost + total_dist)
 #It is commented out as it will ~2mins to compute
@@ -69,14 +75,3 @@ def run(c):
 #         lowest = result
 
 #The best_c = 9.6
-
-ans = run(9.6)
-spath = 'Shortest path: '
-for node in ans[0]:
-    if ans[0].index(node) != len(ans[0])-1:
-        spath+=(node+'->')
-    else:
-        spath+=(node)
-print(spath)
-print('Shortest distance: '+ str(ans[2]))
-print('Total energy cost: '+ str(ans[1]))
