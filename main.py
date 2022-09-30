@@ -4,21 +4,16 @@ import task3
 
 energy_budget = 287932
 
-if __name__ == "__main__":
-    main()
+
 
 def main():
-    user_choice = input("Choose which task number to run [1 or 2 or 3]: ")
-
-    if user_choice == 1:
-    print_path("task 1", findminpath('1', '50', g, dist))
-        continue
-    elif user_choice == 2:
-        task2.task2_search("1", "50", energy_budget)
-    elif user_choice == 3:
-        task3.run()
-    else:
-        print("Task not found! Exiting application!")
-        exit()
+    print("Task 1")
+    task1.print_path("", task1.findminpath('1', '50', task1.g, task1.dist))
+    print("\nTask 2\n")
+    task2.task2_search("1", "50", energy_budget)
+    print("\nTask 3\n")
+    task3.run(9.6)
 
 
+if __name__ == "__main__":
+    main()
