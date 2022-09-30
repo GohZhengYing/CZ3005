@@ -17,14 +17,12 @@ end = '50'
 
 def run(c):
     global G,Coord,Cost,Dist,budget,start,end
-    path = [[start],0,0,0]
-    total_cost = 0
-    total_dist = 0
+    path = [[start],0,0,0]#[path,total_energy_cost,total_dist,f(n)]
+
     deadend = []
 
     path_found = False
-    priority_queue = [[[start],0,0,0]] #[path,total_cost,total_dist,f(n)]
-
+    priority_queue = [path] 
     visited = []
 
     while len(priority_queue) >0 and (not path_found):
@@ -44,7 +42,7 @@ def run(c):
             elif len(G[path_node])>1 and path_node not in current[0] and current[1]+Cost[current[0][-1]+','+path_node]<=budget and path_node not in visited:
                 new_path = [current[0]+[path_node],current[1]+Cost[current[0][-1]+','+path_node],current[2]+Dist[current[0][-1]+','+path_node]]
                 h = math.sqrt((Coord[current[0][-1]][0] - Coord[path_node][0]) ** 2 + (Coord[current[0][-1]][1] - Coord[path_node][1]) ** 2)
-                new_path.append(h*c + new_path[1] + new_path[2])
+                new_path.append(h*c + new_path[1] + new_path[2])# heuristics function = h*c + total_energy_cost + total_dist
                 if len(priority_queue) == 0:
                     priority_queue.append(new_path)
 
@@ -60,8 +58,8 @@ def run(c):
 
     return path
 
-#This was ran to find out the best c in the evaluation function(h * c + total_cost + total_dist)
-#It is commented out as it takes very long (~2mins) to compute
+#This was ran to find out the best c in the function(h * c + total_cost + total_dist)
+#It is commented out as it will ~2mins to compute
 # best_c = 0
 # lowest = 1000000000
 # for c in range(0,100):
@@ -70,7 +68,7 @@ def run(c):
 #         best_c = c
 #         lowest = result
 
-#The best_c =9.6
+#The best_c = 9.6
 
 ans = run(9.6)
 spath = 'Shortest path: '
