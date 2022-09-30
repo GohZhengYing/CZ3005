@@ -78,10 +78,3 @@ def print_path(label: str, pathinformation: PathData) -> None:
     print(f"Total energy cost: {pathinformation.energy}")
 
 
-
-#path = findminpath('1', '50', g, dist)
-#print_path("task 1", path)
-
-
-
-
