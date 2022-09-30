@@ -11,6 +11,7 @@ def main():
     user_choice = input("Choose which task number to run [1 or 2 or 3]: ")
 
     if user_choice == 1:
+    print_path("task 1", findminpath('1', '50', g, dist))
         continue
     elif user_choice == 2:
         task2.task2_search("1", "50", energy_budget)
