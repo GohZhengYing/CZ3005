@@ -1,15 +1,6 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import json
 import queue
 from queue import PriorityQueue
-
-
-# In[2]:
 
 
 with open("Coord.json", "r") as h:
@@ -20,22 +11,14 @@ with open("Cost.json", "r") as i:
         cost = json.load(i)
         i.close()
 
-with open("Dist(2).json", "r") as j:
+with open("Dist.json", "r") as j:
         dist = json.load(j)
         j.close()
 
-with open("G(2).json", "r") as k:
+with open("G.json", "r") as k:
         g = json.load(k)
         k.close()
 
-
-# In[ ]:
-
-
-
-
-
-# In[3]:
 
 
 class PathData:
@@ -47,8 +30,6 @@ class PathData:
         self.dist = dist
         self.energy = energy
 
-
-# In[4]:
 
 
 def findminpath(source: str, dest: str, g: dict, dist: dict) -> PathData:
@@ -89,8 +70,6 @@ def findminpath(source: str, dest: str, g: dict, dist: dict) -> PathData:
     return PathData()
 
 
-# In[5]:
-
 
 def print_path(label: str, pathinformation: PathData) -> None:
     print(label)
@@ -99,14 +78,9 @@ def print_path(label: str, pathinformation: PathData) -> None:
     print(f"Total energy cost: {pathinformation.energy}")
 
 
-# In[6]:
 
-
-path = findminpath('1', '50', g, dist)
-print_path("task 1", path)
-
-
-# In[ ]:
+#path = findminpath('1', '50', g, dist)
+#print_path("task 1", path)
 
 
 
