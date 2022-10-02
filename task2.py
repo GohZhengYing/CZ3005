@@ -20,7 +20,6 @@ class Graph():
             If no dictionary or None is given,
             an empty dictionary will be used
         """
-
         # Initialise neighbour nodes as a list
         self.edges = defaultdict(list)
 
@@ -80,7 +79,7 @@ def task2_search(start_node: str, end_node: str, budget: int):
     temp_node = {}
     temp_node[start_node] = start_node
 
-    # Queue to pop elements
+    # Initialise Queue to pop elements
     queue = []
     # insert the starting index
     queue.append(start_node)
@@ -97,6 +96,7 @@ def task2_search(start_node: str, end_node: str, budget: int):
             print("Error!")
             return
 
+        # End Node reached
         if selected_node == end_node:
             shortest_distance_updated = total_distance[selected_node]
             total_energy_updated = total_energy[selected_node]
@@ -120,13 +120,14 @@ def task2_search(start_node: str, end_node: str, budget: int):
             print("Total energy cost: ", total_energy_updated)
             return
 
-        # calculate energy budget and path cost for each neighbour node of the current node
+        # calculate total current energy cost and total current path cost for each neighbour node of the current node
         for connect_node in graph.edges[selected_node]:
 
             if connect_node not in unvisited_neighbour and connect_node not in all_nodes_visited:
                 total_energy[connect_node] = total_energy[selected_node] + graph.costs[
                     connect_node, selected_node]
 
+                # Check if total energy cost has exceeded energy budget
                 if total_energy[connect_node] > energy_cost_budget:
                     continue
 
@@ -135,7 +136,7 @@ def task2_search(start_node: str, end_node: str, budget: int):
                 temp_node[connect_node] = selected_node
                 total_distance[connect_node] = total_distance[selected_node] + graph.weights[connect_node, selected_node]
 
-            # if neighbour node is in the unvisited or visited
+            # if neighbour node is in 'unvisited' or 'visited'
             else:
 
                 if total_distance[connect_node] > total_distance[selected_node] + graph.weights[connect_node, selected_node]:
@@ -143,6 +144,7 @@ def task2_search(start_node: str, end_node: str, budget: int):
                     total_energy[connect_node] = total_energy[selected_node] + graph.costs[
                         connect_node, selected_node]
 
+                    # Check if total energy cost has exceeded energy budget
                     if total_energy[connect_node] > energy_cost_budget:
                         continue
 
@@ -153,14 +155,13 @@ def task2_search(start_node: str, end_node: str, budget: int):
                         queue.append(connect_node)
                         unvisited_neighbour.add(connect_node)
 
-        # Pop node from queue
+        # Pop/Remove node from queue
         queue.remove(selected_node)
-
-        # remove current node from unvisited and add to visited
+        # Remove current node from 'unvisited' and add to 'visited'
         unvisited_neighbour.remove(selected_node)
         all_nodes_visited.add(selected_node)
 
-    print("Invalid path")
+    print("Invalid path!")
     return
 
 #task2_search("1","50", energy_budget)
